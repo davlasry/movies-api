@@ -1,20 +1,14 @@
 <div class="app-container" fxLayout="column">
-  <header>
-    <nav>
-      <ul>
-        <li>
-          <h2>
-            <a routerLink="/movies" routerLinkActive="active">Movies</a>
-          </h2>
-        </li>
-        <li>
-          <h2>
-            <a routerLink="/about" routerLinkActive="active">About</a>
-          </h2>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <div class="menu" fxLayout="row">
+    <ul fx-layout="row" fxLayoutAlign="start center">
+      <li>
+        <a routerLink="/movies" routerLinkActive="active">Movies</a>
+      </li>
+      <li>
+        <a routerLink="/about" routerLinkActive="active">About</a>
+      </li>
+    </ul>
+  </div>
 
   <div class="router-container">
     <router-outlet></router-outlet>
