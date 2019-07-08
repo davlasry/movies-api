@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class MoviesService {
+  API_BASE_URL = '';
 
-  constructor() { }
+  constructor() {}
 }
