@@ -1,14 +1,22 @@
-<ul>
-  <li>
-    <h2>
-      <a routerLink="/movies" routerLinkActive="active">Movies</a>
-    </h2>
-  </li>
-  <li>
-    <h2>
-      <a routerLink="/about" routerLinkActive="active">About</a>
-    </h2>
-  </li>
-</ul>
+<div class="app-container">
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <h2>
+            <a routerLink="/movies" routerLinkActive="active">Movies</a>
+          </h2>
+        </li>
+        <li>
+          <h2>
+            <a routerLink="/about" routerLinkActive="active">About</a>
+          </h2>
+        </li>
+      </ul>
+    </nav>
+  </header>
 
-<router-outlet></router-outlet>
+  <div class="router-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
