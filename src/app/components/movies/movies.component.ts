@@ -8,9 +8,18 @@ import { MoviesService } from 'src/app/services/movies.service';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  movies: Movie[];
+  popularMovies: Movie[];
 
   constructor(private moviesService: MoviesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.moviesService.getMovie(47933).subscribe(res => {
+      console.log(res);
+    });
+
+    this.moviesService.getPopularMovies().subscribe(res => {
+      this.popularMovies = res;
+      console.log(res);
+    });
+  }
 }
