@@ -1,6 +1,6 @@
 <div class="app-container" fxLayout="column">
   <div class="menu" fxLayout="row">
-    <ul fx-layout="row" fxLayoutAlign="start center">
+    <ul fxlayout="row" fxLayoutAlign="start center">
       <li>
         <a routerLink="/movies" routerLinkActive="active">Movies</a>
       </li>
@@ -10,7 +10,7 @@
     </ul>
   </div>
 
-  <div class="router-container">
+  <div fxFlex fxLayout="column" class="router-container">
     <router-outlet></router-outlet>
   </div>
 </div>

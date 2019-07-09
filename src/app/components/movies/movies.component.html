@@ -1,7 +1,92 @@
-<h2>Movies</h2>
+<div class="movies-container" fxLayout="column">
+  <h2 class="page-title">Movies</h2>
 
-<div *ngFor="let movie of popularMovies">
-  <div>
-    {{ movie.title }}
+  <div fxFlex class="table-container">
+    <p-table
+      #dt
+      [columns]="cols"
+      [value]="popularMovies"
+      dataKey="title"
+      [scrollable]="true"
+      scrollHeight="100%"
+      (onRowExpand)="onRowExpand($event)"
+      (onRowCollapse)="onRowCollapse($event)"
+      [expandedRowKeys]="expandedRows"
+      [paginator]="true"
+      [rows]="5"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th style="width: 3em"></th>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{ col.header }}
+            <p-sortIcon
+              [field]="col.field"
+              ariaLabel="Activate to sort"
+              ariaLabelDesc="Activate to sort in descending order"
+              ariaLabelAsc="Activate to sort in ascending order"
+            ></p-sortIcon>
+          </th>
+        </tr>
+        <tr>
+          <th style="width: 3em"></th>
+          <th *ngFor="let col of columns">
+            <input
+              pInputText
+              type="text"
+              (input)="
+                dt.filter($event.target.value, col.field, col.filterMatchMode)
+              "
+            />
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-rowData
+        let-expanded="expanded"
+        let-columns="columns"
+      >
+        <tr>
+          <td style="width: 3em">
+            <a href="#" [pRowToggler]="rowData">
+              <i
+                [ngClass]="
+                  expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                "
+              ></i>
+            </a>
+          </td>
+          <td *ngFor="let col of columns">
+            {{ rowData[col.field] }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+        <tr>
+          <td [attr.colspan]="columns.length + 1">
+            <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+              <div class="ui-g-12 ui-md-3" style="text-align:center"></div>
+              <div class="ui-g-12 ui-md-9">
+                <div class="ui-g">
+                  <div class="ui-g-12">
+                    <b>Title:</b>
+                    <span class="movie-title" (click)="onClickMovieTitle()">
+                      {{ rowData.title }}
+                    </span>
+                  </div>
+                  <div *ngIf="movieExpanded">
+                    <p>Movie Expanded</p>
+                  </div>
+                  <div class="ui-g-12">
+                    <b>Original Title:</b> {{ rowData.original_title }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
   </div>
 </div>

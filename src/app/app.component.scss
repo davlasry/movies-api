@@ -24,7 +24,16 @@
         a {
           color: white;
         }
+
+        .active {
+          color: red;
+        }
       }
     }
+  }
+
+  .router-container {
+    overflow: hidden;
+    height: 100%;
   }
 }
