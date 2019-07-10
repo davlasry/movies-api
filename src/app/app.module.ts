@@ -11,9 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './components/about/about.component';
 import { MoviesComponent } from './components/movies/movies.component';
+import { MovieInfoComponent } from './components/movie-info/movie-info.component';
 
 @NgModule({
-  declarations: [AppComponent, AboutComponent, MoviesComponent],
+  declarations: [AppComponent, AboutComponent, MoviesComponent, MovieInfoComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,

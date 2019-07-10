@@ -1,0 +1,43 @@
+<div class="movie-info-container" *ngIf="movieInfo">
+  <p-table [value]="data" dataKey="id">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3em"></th>
+        <th>MovieID</th>
+        <th>Main Actor</th>
+        <th>Duration</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-col let-expanded="expanded">
+      <tr>
+        <td style="width: 3em">
+          <a href="#" [pRowToggler]="rowData">
+            <i
+              [ngClass]="
+                expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+              "
+            ></i>
+          </a>
+        </td>
+        <td>{{ col.id }}</td>
+        <td>{{ col.title }}</td>
+        <td>{{ formatDuration(col.runtime) }}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+      <tr>
+        <td [attr.colspan]="4">
+          <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
+            <div class="ui-g-12 ui-md-12">
+              <div class="ui-g">
+                <div class="ui-g-12">
+                  <p>MOVIE INFO</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

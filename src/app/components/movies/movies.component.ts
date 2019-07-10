@@ -13,7 +13,7 @@ export class MoviesComponent implements OnInit {
   public cols: TableColumns[];
   public movieExpanded: boolean;
   public expandedRows: any;
-  public movieInfo: Movie;
+  public movieInfo: Movie | {};
   public currentPage: number;
 
   constructor(private moviesService: MoviesService) {
@@ -49,6 +49,7 @@ export class MoviesComponent implements OnInit {
   onRowExpand(event) {
     console.log('EXPAND', event);
     console.log(this.expandedRows);
+    this.movieInfo = {};
     this.movieExpanded = false;
     this.expandedRows = { [event.data.title]: true };
     this.moviesService.getMovie(event.data.id).subscribe(res => {
@@ -69,25 +70,5 @@ export class MoviesComponent implements OnInit {
 
   getYearFromDate(date) {
     return date.split('-')[0];
-  }
-
-  getDirectorName(movieCredits) {
-    for (const crewMember of movieCredits.crew) {
-      if (crewMember.job === 'Director') {
-        return crewMember.name;
-      }
-    }
-  }
-
-  formatDuration(minutesNumber) {
-    const hours = Math.floor(minutesNumber / 60);
-    const minutes = minutesNumber % hours;
-
-    let formatedMinutes;
-    if (minutes < 10) {
-      formatedMinutes = `0${minutes}`;
-    }
-
-    return `${hours}:${formatedMinutes}`;
   }
 }

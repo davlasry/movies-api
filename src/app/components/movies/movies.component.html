@@ -71,20 +71,7 @@
             <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
               <div class="ui-g-12 ui-md-12">
                 <div class="ui-g">
-                  <div class="ui-g-12">
-                    <b>Title:</b>
-                    <span class="movie-title" (click)="onClickMovieTitle()">
-                      {{ rowData.title }}
-                    </span>
-                  </div>
-                  <div *ngIf="movieExpanded">
-                    <p>Main Actor: {{ movieInfo.credits.cast[0].name }}</p>
-                    <p>Director: {{ getDirectorName(movieInfo.credits) }}</p>
-                    <p>Duration: {{ formatDuration(movieInfo.runtime) }}</p>
-                  </div>
-                  <div class="ui-g-12">
-                    <b>Original Title:</b> {{ rowData.original_title }}
-                  </div>
+                  <app-movie-info [movieInfo]="movieInfo"></app-movie-info>
                 </div>
               </div>
             </div>
