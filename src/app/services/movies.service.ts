@@ -18,9 +18,9 @@ export class MoviesService {
       .pipe(map(movies => movies.results));
   }
 
-  getMovie(movieID): Observable<any> {
+  getMovieCredits(movieID): Observable<any> {
     return this.http.get<any>(
-      `${this.API_BASE_URL}/movie/${movieID}?api_key=${this.API_KEY}`
+      `${this.API_BASE_URL}/movie/${movieID}/credits?api_key=${this.API_KEY}`
     );
   }
 }

@@ -18,16 +18,17 @@ export class MoviesComponent implements OnInit {
   public popularMovies: Movie[];
   public cols: any[];
   public movieExpanded: boolean;
-  public expandedRows = {};
+  public expandedRows: any;
+  public movieCredits: any;
 
   constructor(private moviesService: MoviesService) {
     this.movieExpanded = false;
+    this.expandedRows = {};
+    this.movieCredits = {}
+
   }
 
   ngOnInit() {
-    this.moviesService.getMovie(47933).subscribe(res => {
-      console.log(res);
-    });
 
     this.cols = [
       { field: 'title', header: 'Title' },
@@ -47,6 +48,10 @@ export class MoviesComponent implements OnInit {
     console.log(this.expandedRows);
     this.movieExpanded = false;
     this.expandedRows = { [event.data.title]: true };
+    this.moviesService.getMovieCredits(event.data.id).subscribe(res=>{
+      console.log(res);
+      this.movieCredits = res;
+    });
   }
 
   onRowCollapse(event) {
@@ -56,10 +61,18 @@ export class MoviesComponent implements OnInit {
   }
 
   onClickMovieTitle() {
-    this.movieExpanded = true;
+    this.movieExpanded = !this.movieExpanded;
   }
 
   getYearFromDate(date) {
     return date.split('-')[0];
+  }
+
+  getDirectorName(movieCredits) {
+    for (let crewMember of movieCredits.crew) {
+      if (crewMember.job === 'Director') {
+        return crewMember.name;
+      }
+    }
   }
 }
