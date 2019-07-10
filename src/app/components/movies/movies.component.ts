@@ -31,7 +31,9 @@ export class MoviesComponent implements OnInit {
 
     this.cols = [
       { field: 'title', header: 'Title' },
-      { field: 'original_title', header: 'Original Title' }
+      { field: 'id', header: 'Code' },
+      { field: 'release_date', header: 'Year' },
+      { field: 'vote_average', header: 'Rating' },
     ];
 
     this.moviesService.getPopularMovies().subscribe(res => {
@@ -55,5 +57,9 @@ export class MoviesComponent implements OnInit {
 
   onClickMovieTitle() {
     this.movieExpanded = true;
+  }
+
+  getYearFromDate(date) {
+    return date.split('-')[0];
   }
 }

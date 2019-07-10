@@ -12,8 +12,6 @@
       (onRowExpand)="onRowExpand($event)"
       (onRowCollapse)="onRowCollapse($event)"
       [expandedRowKeys]="expandedRows"
-      [paginator]="true"
-      [rows]="5"
     >
       <ng-template pTemplate="header" let-columns>
         <tr>
@@ -58,7 +56,10 @@
             </a>
           </td>
           <td *ngFor="let col of columns">
-            {{ rowData[col.field] }}
+            <span *ngIf="col.field !== 'release_date'">
+              {{ rowData[col.field] }}
+            </span>
+            <span *ngIf="col.field === 'release_date'">{{ getYearFromDate(rowData[col.field]) }}</span>
           </td>
         </tr>
       </ng-template>
