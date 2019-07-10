@@ -1,13 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Movie } from 'src/app/models/movie.model';
+import { Movie, PopularMovie } from 'src/app/models/movie.model';
 import { MoviesService } from 'src/app/services/movies.service';
-import {
-  trigger,
-  state,
-  style,
-  transition,
-  animate
-} from '@angular/animations';
+import { TableColumns } from 'src/app/models/data-table.model';
 
 @Component({
   selector: 'app-movies',
@@ -15,30 +9,39 @@ import {
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  public popularMovies: Movie[];
-  public cols: any[];
+  public popularMovies: PopularMovie[];
+  public cols: TableColumns[];
   public movieExpanded: boolean;
   public expandedRows: any;
-  public movieCredits: any;
+  public movieInfo: Movie;
+  public currentPage: number;
 
   constructor(private moviesService: MoviesService) {
     this.movieExpanded = false;
     this.expandedRows = {};
-    this.movieCredits = {}
-
+    this.currentPage = 1;
   }
 
   ngOnInit() {
+    // this.moviesService.getMovie(429617).subscribe(res => {
+    //   console.log(res);
+    // });
 
     this.cols = [
       { field: 'title', header: 'Title' },
       { field: 'id', header: 'Code' },
       { field: 'release_date', header: 'Year' },
-      { field: 'vote_average', header: 'Rating' },
+      { field: 'vote_average', header: 'Rating' }
     ];
 
-    this.moviesService.getPopularMovies().subscribe(res => {
+    this.getPopularMovies();
+    setInterval(() => this.getPopularMovies(), 300000);
+  }
+
+  getPopularMovies() {
+    this.moviesService.getPopularMovies(this.currentPage).subscribe(res => {
       this.popularMovies = res;
+      this.currentPage = this.currentPage + 1;
       console.log(res);
     });
   }
@@ -48,9 +51,9 @@ export class MoviesComponent implements OnInit {
     console.log(this.expandedRows);
     this.movieExpanded = false;
     this.expandedRows = { [event.data.title]: true };
-    this.moviesService.getMovieCredits(event.data.id).subscribe(res=>{
+    this.moviesService.getMovie(event.data.id).subscribe(res => {
       console.log(res);
-      this.movieCredits = res;
+      this.movieInfo = res;
     });
   }
 
@@ -69,10 +72,22 @@ export class MoviesComponent implements OnInit {
   }
 
   getDirectorName(movieCredits) {
-    for (let crewMember of movieCredits.crew) {
+    for (const crewMember of movieCredits.crew) {
       if (crewMember.job === 'Director') {
         return crewMember.name;
       }
     }
+  }
+
+  formatDuration(minutesNumber) {
+    const hours = Math.floor(minutesNumber / 60);
+    const minutes = minutesNumber % hours;
+
+    let formatedMinutes;
+    if (minutes < 10) {
+      formatedMinutes = `0${minutes}`;
+    }
+
+    return `${hours}:${formatedMinutes}`;
   }
 }

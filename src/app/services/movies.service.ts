@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PopularMovies, Movie, PopularMovie } from '../models/movie.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,21 @@ export class MoviesService {
 
   constructor(private http: HttpClient) {}
 
-  getPopularMovies(): Observable<any> {
+  getPopularMovies(pageNumber): Observable<PopularMovie[]> {
     return this.http
-      .get<any>(`${this.API_BASE_URL}/movie/popular?api_key=${this.API_KEY}`)
+      .get<PopularMovies>(
+        `${this.API_BASE_URL}/movie/popular?api_key=${
+          this.API_KEY
+        }&page=${pageNumber}`
+      )
       .pipe(map(movies => movies.results));
   }
 
-  getMovieCredits(movieID): Observable<any> {
-    return this.http.get<any>(
-      `${this.API_BASE_URL}/movie/${movieID}/credits?api_key=${this.API_KEY}`
+  getMovie(movieID): Observable<Movie> {
+    return this.http.get<Movie>(
+      `${this.API_BASE_URL}/movie/${movieID}?api_key=${
+        this.API_KEY
+      }&append_to_response=credits`
     );
   }
 }
