@@ -1,4 +1,4 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+$primary-color: #081c24;
 
 * {
   margin: 0;
@@ -9,16 +9,23 @@ body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   background-color: #d2d2d2;
   height: 100vh;
-  color: #2b2b2b;
+  color: $primary-color;
 }
 
 ul {
   list-style: none;
 }
 
-a {
+body a {
   text-decoration: none;
-  color: #2b2b2b;
+  color: $primary-color;
+}
+
+body a:hover {
+  color: $primary-color;
+}
+body a:active {
+  color: $primary-color;
 }
 
 .page-title {
@@ -27,4 +34,9 @@ a {
 
 body .ui-table .ui-sortable-column {
   outline: none;
+}
+
+body .ui-table .ui-sortable-column.ui-state-highlight {
+  background-color: #01d277;
+  color: #ffffff;
 }
