@@ -1,0 +1,50 @@
+td {
+  text-align: center;
+}
+
+.movie-details {
+  background-color: #ffffff !important;
+  text-align: initial;
+
+  a {
+    color: #02c771;
+    border-bottom: 1px solid rgba(218, 219, 223, 0.5);
+
+    &:hover {
+      background-color: #f7f7f7;
+    }
+  }
+
+  b {
+    margin-right: 10px;
+  }
+
+  ul {
+    padding-left: 15px;
+    margin-top: 10px;
+  }
+
+  .movie-poster {
+    margin-right: 50px;
+  }
+
+  .details-block {
+    min-width: 300px;
+
+    .company-name {
+      margin-right: 10px;
+    }
+  }
+
+  .actors-block {
+    min-width: 200px;
+  }
+
+  .overview {
+    margin-top: 30px;
+  }
+
+  .info-element {
+    margin-bottom: 15px;
+  }
+}

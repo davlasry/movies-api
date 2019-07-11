@@ -55,7 +55,12 @@
               ></i>
             </a>
           </td>
-          <td *ngFor="let col of columns">
+          <td
+            *ngFor="let col of columns"
+            [ngStyle]="{
+              'text-align': col.field !== 'title' ? 'center' : 'initial'
+            }"
+          >
             <span *ngIf="col.field !== 'release_date'">
               {{ rowData[col.field] }}
             </span>

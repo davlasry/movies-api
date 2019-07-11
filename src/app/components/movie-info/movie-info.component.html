@@ -20,18 +20,69 @@
           </a>
         </td>
         <td>{{ col.id }}</td>
-        <td>{{ col.title }}</td>
+        <td>
+          <span *ngIf="col.credits">{{ col.credits.cast[0].name }}</span>
+        </td>
         <td>{{ formatDuration(col.runtime) }}</td>
       </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
       <tr>
-        <td [attr.colspan]="4">
+        <td [attr.colspan]="4" class="movie-details">
           <div class="ui-g ui-fluid" style="font-size:16px;padding:20px">
             <div class="ui-g-12 ui-md-12">
               <div class="ui-g">
                 <div class="ui-g-12">
-                  <p>MOVIE INFO</p>
+                  <div fxLayout="row">
+                    <div class="movie-poster">
+                      <img
+                        src="http://image.tmdb.org/t/p/w185//{{
+                          movieInfo.poster_path
+                        }}"
+                      />
+                    </div>
+                    <div class="details-block">
+                      <div class="info-element" fxLayout="column">
+                        <b>Release date</b>
+                        <span>{{ movieInfo.release_date }}</span>
+                      </div>
+                      <div class="info-element">
+                        <b>Production companies</b>
+                        <ul>
+                          <li
+                            *ngFor="
+                              let productionCompany of movieInfo.production_companies
+                            "
+                          >
+                            <span class="company-name">{{
+                              productionCompany.name
+                            }}</span>
+                            <span class="company-origin"
+                              >({{ productionCompany.origin_country }})</span
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="info-element">
+                        <a href="{{ movieInfo.homepage }}" target="_blank"
+                          >Website</a
+                        >
+                      </div>
+                    </div>
+                    <div fxFlex></div>
+                    <div class="actors-block">
+                      <b>Actors</b>
+                      <ul *ngIf="topActors">
+                        <li *ngFor="let actor of topActors; let i = index">
+                          <span *ngIf="i < 5">{{ actor.name }}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="overview">
+                    <b>Overview</b>
+                    <p>{{ movieInfo.overview }}</p>
+                  </div>
                 </div>
               </div>
             </div>

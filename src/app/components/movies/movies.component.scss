@@ -19,6 +19,14 @@ p-table {
   ::ng-deep .ui-inputtext {
     width: 100%;
   }
+
+  ::ng-deep .ui-table-scrollable-body {
+    overflow-y: scroll;
+  }
+
+  ::ng-deep .ui-table-scrollable-header-box {
+    margin-right: 17px !important;
+  }
 }
 
 .movie-title {

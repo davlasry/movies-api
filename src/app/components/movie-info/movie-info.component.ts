@@ -16,6 +16,10 @@ export class MovieInfoComponent implements OnInit {
     return [this.movieInfo];
   }
 
+  get topActors() {
+    return this.movieInfo.credits.cast.slice(0, 5);
+  }
+
   formatDuration(minutesNumber) {
     if (isNaN(minutesNumber)) {
       return;
