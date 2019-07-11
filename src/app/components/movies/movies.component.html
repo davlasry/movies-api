@@ -1,7 +1,7 @@
 <div class="movies-container" fxLayout="column">
   <!-- <h2 class="page-title">Popular Movies</h2> -->
 
-  <div fxFlex class="table-container">
+  <div fxFlex fxLayout="column" class="table-container">
     <p-table
       #dt
       [columns]="cols"
@@ -47,7 +47,7 @@
       >
         <tr>
           <td style="width: 3em">
-            <a href="#" [pRowToggler]="rowData">
+            <a href="#" [pRowToggler]="rowData" class="chevron">
               <i
                 [ngClass]="
                   expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'

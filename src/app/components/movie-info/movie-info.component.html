@@ -11,7 +11,7 @@
     <ng-template pTemplate="body" let-rowData let-col let-expanded="expanded">
       <tr>
         <td style="width: 3em">
-          <a href="#" [pRowToggler]="rowData">
+          <a href="#" [pRowToggler]="rowData" class="chevron">
             <i
               [ngClass]="
                 expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
